@@ -19,12 +19,12 @@ ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update && apt-get install -y vim tmux \
-    git zsh curl wget python python3 tzdata
+    git zsh curl wget python python3 golang tzdata
 
 COPY .vimrc /root/
-COPY .vim /root/.vim
-COPY .tmux /root/.tmux
 COPY .tmux.conf /root/
+COPY install_plugins.sh ./
+RUN ./install_plugins.sh
 
 ENV TERM xterm-256color
 # oh-my-zsh
